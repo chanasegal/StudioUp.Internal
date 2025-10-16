@@ -1,0 +1,23 @@
+# Node modules
+node_modules/
+
+# Angular build output
+dist/
+out-tsc/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+*.log
+
+# VS Code settings
+.vscode/
+
+# Environment files
+*.env
+
+# Compiled files
+bin/
+obj/
