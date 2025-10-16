@@ -1,0 +1,85 @@
+@import "primeicons/primeicons.css";
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3.5%;
+  align-items: center;
+}
+
+.speedDial button {
+  background-color: #ffcc0f;
+  width: 1.8%;
+  height: 1.8%;
+  border-radius: 100%;
+}
+
+.p-speeddial {
+  font-size: 12px;
+}
+
+.p-speeddial-action {
+  width: 2rem;
+  height: 2rem;
+  background: #919fae;
+  color: #fff;
+  text-decoration: none;
+}
+
+.p-icon {
+  display: none;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  border-bottom: 1px solid #64748b;
+  color: #d91c5c;
+  text-align: center;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  text-align: center;
+}
+
+.p-datatable .p-datatable-tbody > tr > td:nth-child(4) {
+  width: 15%;
+}
+
+.p-datatable .p-datatable-tbody > tr > td:nth-child(6) {
+  width: 14%;
+}
+
+.add-button button {
+  background-color: #7c7c70;
+  width: 8rem;
+}
+
+// button, input, optgroup, select, textarea {
+//   margin: 0;
+//   font-family: inherit;
+//   font-size: inherit;
+//   line-height: inherit;
+// }
+
+.p-dialog .p-dialog-header {
+  color: #d91c5c;
+}
+
+.p-dialog .p-dialog-header-icons {
+  display: none;
+}
+
+.p-button {
+  background-color: #7c7c70;
+}
+
+.p-confirm-dialog .p-dialog-content {
+  flex-direction: row-reverse;
+}
+
+.pi-info-circle {
+  margin-top: 1rem;
+}
+
+.p-dialog.p-confirm-dialog .p-confirm-dialog-message {
+  margin-left: 1rem;
+  margin-top: 1rem;
+}

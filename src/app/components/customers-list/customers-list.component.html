@@ -1,0 +1,46 @@
+<div class="panel">
+  <h1>לקוחות <img src="assets/contact-icon.png" alt="Contact Icon" class="contact-icon"></h1>
+  <div class="body">
+    <div class="search-inputs">
+      <div class="search-wrapper">
+        <input id="searchNameInput" placeholder="חפש לפי שם" type="search" class="form-control" #nameInput (input)="filterBySearch(nameInput.value, emailInput.value)" />
+        <img src="assets/search-icon2.png" alt="Search Icon" class="search-icon">
+      </div>
+      <div class="search-wrapper">
+        <input id="searchEmailInput" placeholder="חפש לפי אימייל" type="search" class="form-control" #emailInput (input)="filterBySearch(nameInput.value, emailInput.value)" />
+        <img src="assets/search-icon2.png" alt="Search Icon" class="search-icon">
+      </div>
+    </div>
+    <p-accordion>
+      <p-accordionTab *ngFor="let customer of displayedCustomers" (click)="selectCust(customer.id)">
+        <ng-template pTemplate="header">
+          <div class="accordion-header">
+            <div class="row">
+              <div class="customer-detail">
+               <span class="value">{{ customer.firstName}} {{ customer.lastName}}</span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <div class="accordion-content">
+          <p class="m-0">
+            <!-- מזהה לקוח: {{ customer.id }} -->
+            <app-customer-card *ngIf="selectedCustomerId === customer.id" [custId]="selectedCustomerId"></app-customer-card>
+          </p>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+    <div class="pagination-buttons" *ngIf="customers.length > itemsPerPage">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">הקודם</button>
+      <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= customers.length">הבא</button>
+    </div>
+  </div>
+  <div class="bt">
+    <p-button label="הוספת לקוח" [raised]="true"  (click)="navigateToAddCustomer()" severity="secondary" class="add-customer-button">
+      <span class="add-customer-icon-wrapper">
+        <img src="assets/plus-icon2.png" alt="Add Customer Icon" class="add-customer-icon">
+      </span>
+    </p-button>
+  </div>
+  <app-customer-card *ngIf="addCust" ></app-customer-card>
+</div>

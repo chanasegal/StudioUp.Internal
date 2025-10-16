@@ -1,0 +1,58 @@
+ 
+<div class="cardCust">
+    <p-tabView>
+            <ng-container *ngIf="!toedit; else otherContent">
+                <p>
+                    <label class="title">שם </label><br>
+                    <span [innerText]=" (currentTrainer?.lastName) + ' ' + (currentTrainer?.firstName)"></span>
+                </p>
+                <p>
+                    <label class="title">טלפון </label><br>
+                    <span [innerText]="currentTrainer?.tel"></span>
+                </p>
+                <p>
+                    <label class="title">מייל </label><br>
+                    <span [innerText]="currentTrainer?.mail"></span>
+                </p>
+                <p>
+                    <label class="title">כתובת </label><br>
+                    <span [innerText]="currentTrainer?.address"></span>
+                </p>
+         
+               
+                <input type="button" value="עריכה" (click)="edit()">
+            </ng-container>
+    
+   
+
+    </p-tabView>
+  
+    <ng-template #otherContent>
+        <form [formGroup]="myForm" id="form" (submit)="saveChanges()">
+            <div class="form-group">
+                <label>שם פרטי</label><br>
+                <input pInputText id="firstName" formControlName="firstName"  />
+            </div>
+            <div class="form-group">
+                <label>שם משפחה</label><br>
+                <input pInputText id="lastName" formControlName="lastName"  />
+            </div>
+            <div class="form-group">
+                <label>טלפון</label><br>
+                <input pInputText id="tel" formControlName="tel"/>
+            </div>
+            <div class="form-group">
+                <label>מייל</label><br>
+                <input pInputText id="email" formControlName="mail"  />
+            </div>
+            <div class="form-group">
+                <label>כתובת</label><br>
+                <input pInputText id="address" formControlName="address" />
+            </div>
+            
+         
+            <input type="submit" value="שמור שינויים" [disabled]="!myForm.valid">
+        </form>
+    </ng-template> 
+</div>
+

@@ -1,0 +1,59 @@
+<div class="container-fluid" dir="ltr">
+    <div class="row heder">
+        <img src="../../../assets/logo.png" alt="logo" class="img">
+            <div class="admin pi pi-user">
+                <label>admin</label>
+            </div>
+    </div>
+    <div class="row body">
+        <div class="col-4 home-page">
+            <app-trainings-list></app-trainings-list>
+        </div>
+        <div class="col-7">
+            <div class="row home-page">
+                <app-customers-list></app-customers-list>
+            </div>
+        </div>
+        
+        <div class="col-p">
+            <p-sidebar [(visible)]="sidebarVisible2" position="right" class="sidebar">
+                <ul class="list-none p-0 m-0 overflow-hidden">
+                    <li>
+                        <a pRipple class="menu-item" [routerLink]="['/trainers-list']">
+                            <i class="pi pi-id-card mr-2"></i>
+                            <span class="font-medium">צוות מאמנים</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a pRipple class="menu-item" [routerLink]="['/customers-list']">
+                            <i class="pi pi-users mr-2"></i>
+                            <span class="font-medium">לקוחות</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a pRipple class="menu-item" [routerLink]="['/subscriptions-options']">
+                            <i class="pi pi-cog mr-2"></i>
+                            <span class="font-medium">ניהול מנויים</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a pRipple class="menu-item" [routerLink]="['/managment-table']">
+                            <i class="pi pi-cog mr-2"></i>
+                            <span class="font-medium">טבלאות ניהול</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a pRipple class="menu-item" [routerLink]="['/trainings-list']">
+                            <i class="pi pi-bookmark mr-2"></i>
+                            <span class="font-medium">אימונים</span>
+                        </a>
+                    </li>
+                </ul>
+            </p-sidebar>
+            <p-button type="button" class="menu-toggle" (onClick)="sidebarVisible2 = true" icon='pi pi-bars'></p-button>
+        </div>
+    </div>
+    <div class="row footer">
+        <app-footer></app-footer>
+    </div>
+</div>

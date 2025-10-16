@@ -1,0 +1,122 @@
+<!-- <div>
+  <div id="pratim" dir="auto">
+    <p>
+      <label class="title">סוג אימון</label><br>
+      <span [innerText]="thistrain.trainingCustomerTypeName"></span>
+    </p>
+    <p>
+      <label class="title">שם מאמן </label><br>
+      <span [innerText]="thistrain.trainerName"></span>
+    </p>
+    <p>
+      <label class="title">יום בשבוע </label><br>
+      <span [innerText]="thistrain.dayOfWeek"></span>
+    </p>
+    <p>
+      <label class="title">שעה </label><br>
+      <span [innerText]="thistrain.hour"></span>
+    </p>
+    <p>
+      <label class="title">דקות </label><br>
+      <span [innerText]="thistrain.minute"></span>
+    </p>
+    <p>
+      <label class="title">מספר משתתפות</label><br>
+      <span [innerText]="thistrain.participantsCount"></span>
+    </p>
+  </div>
+  <input type="button" value="עריכה" (click)="edit()"> -->
+
+<p-tabView>
+  <ng-container #else *ngIf="!toedit && id!==0; else otherContent">
+    <div id="pratim" dir="auto">
+      <p>
+        <label class="title">סוג אימון</label><br>
+        <span [innerText]="thistrain.trainingCustomerTypeName"></span>
+      </p>
+      <p>
+        <label class="title">שם מאמן </label><br>
+        <span [innerText]="thistrain.trainerName"></span>
+      </p>
+      <p>
+        <label class="title">יום בשבוע </label><br>
+        <span [innerText]="thistrain.dayOfWeek | dayOfWeek"></span>
+      </p>
+      <p>
+        <label class="title">שעה </label><br>
+        <span [innerText]="thistrain.hour"></span>
+        <label>:</label>
+        <span [innerText]="thistrain.minute"></span>
+      </p>
+      <p>
+        <label class="title">מספר משתתפות</label><br>
+        <span [innerText]="thistrain.participantsCount"></span>
+      </p>
+    </div>
+    <input type="button" value="עריכה" (click)="edit()"  style="width: 40% ;margin-right:10%;display: inline;">
+    <input type="button" value="מחיקה" (click)="delete()"  style="width: 40% ;margin-right:10%;display: inline;">
+
+  </ng-container>
+
+
+  <ng-template #otherContent>
+    <form #myForm="ngForm" *ngIf="toedit || id===0" (ngSubmit)="saveChanges(id)" id="fo">
+      <div class="form-group" dir="auto">
+        <label class="title">סוג אימון</label><br>
+        <select id="TCTID" pInputText [(ngModel)]="thistrain.trainingCustomerTypeId" name="TCTID">
+          <option *ngFor="let person of alltrainingCustomerType" [value]="person.id">{{
+            person.trainingCustomerTypeName }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group" dir="auto">
+        <label class="title">שם מאמן</label><br>
+        <select pInputText [(ngModel)]="thistrain.trainerID" name="trainerName">
+          <option *ngFor="let person of alltrainer" [value]="person.id">{{ person.firstName +' '+
+            person.lastName}}
+          </option>
+        </select>
+        <div *ngIf="myForm.controls['trainerID']?.invalid && myForm.controls['trainerID']?.touched">
+          <small class="text-danger">שדה חובה</small>
+        </div>
+
+      </div>
+
+      <!-- dayOfWeek: ['', [Validators.required, Validators.min(1), Validators.max(6)]], -->
+
+      <div class="form-group" dir="auto">
+        <label class="title">יום בשבוע</label><br>
+        <input type="number" [(ngModel)]="thistrain.dayOfWeek" name="dayOfWeek" min="1" max="6">
+        <!-- <div *ngIf="myForm.controls['dayOfWeek']?.invalid && myForm.controls['dayOfWeek']?.touched">
+          <small class="text-danger">שדה חובה</small>
+        </div> -->
+      </div>
+
+      <div class="form-group" dir="auto">
+        <label class="title">שעה</label><br>
+        <input type="text" [(ngModel)]="thistrain.minute" name="hour" style="width: 50px">
+        <label>:</label>
+        <input type="text" [(ngModel)]="thistrain.hour" name="minute"
+         style="width: 50px">
+        <!-- <div *ngIf="myForm.controls['minute']?.invalid && myForm.controls['minute']?.touched">
+          <small class="text-danger">שדה חובה</small>
+        </div> -->
+      </div>
+
+      <div class="form-group" dir="auto">
+        <label class="title">מספר משתתפות</label><br>
+        <input type="number" [(ngModel)]="thistrain.participantsCount" name="participantsCount" min="1">
+        <br> <br>
+        <div *ngIf="myForm.controls['participantsCount']?.invalid && myForm.controls['participantsCount']?.touched">
+          <small class="text-danger">שדה חובה</small>
+        </div>
+      </div>
+      <div class="form-group" dir="rtl">
+        <input type="submit" value="שמירה">
+      </div>
+
+    </form>
+  </ng-template>
+
+</p-tabView>

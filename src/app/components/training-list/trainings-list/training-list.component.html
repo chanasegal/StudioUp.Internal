@@ -1,0 +1,38 @@
+<div class="panel">
+  <div class="header">
+    <h1>אימונים</h1>
+    <div class="bt">
+      <p-button label="הוספת אימון" [raised]="true" (click)="navigateToAddTraining()" severity="secondary"
+        class="add-training-button">
+        <span class="add-customer-icon-wrapper">
+          <img src="assets/plus-training-icon.png" alt="Add Customer Icon" class="add-training-icon">
+        </span>
+      </p-button>
+    </div>
+  </div>
+ 
+
+  
+  <div class="body">
+    <p-accordion>
+      <p-accordionTab *ngFor="let training of displayedcalanderAT" (click)="selectTraining(training.id)">
+        <ng-template pTemplate="header">
+          <div class="accordion-header">
+            <app-trainings-deatails [training]="training"></app-trainings-deatails>
+          </div>
+        </ng-template>
+        <div class="accordion-content">
+          <p class="m-0">
+            <app-single-lesson *ngIf="selectedTrainingId === training.id" [id]="selectedTrainingId"></app-single-lesson>
+          </p>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+
+  
+  </div>
+  <p-dialog header="הוספת אימון" [(visible)]="addTraining" (onHide)="closeAddTrainingDialog()">
+    <app-single-lesson [id]="0"></app-single-lesson>
+
+  </p-dialog>
+</div>

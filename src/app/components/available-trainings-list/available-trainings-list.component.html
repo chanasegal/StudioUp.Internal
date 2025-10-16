@@ -1,0 +1,39 @@
+<div class="panel">
+  <h1>אימונים <img src="assets/dumbbell-icon.png" alt="Contact Icon" class="contact-icon"></h1>
+  <div class="body">
+    <div class="controls-container" [formGroup]="filterForm">
+      <div class="cal">
+        <p-calendar placeholder="אימונים מתאריך" formControlName="date1" [showIcon]="true" inputId="icondisplay1"></p-calendar>
+      </div>
+      <div class="cal">
+        <p-calendar placeholder="אימונים עד תאריך" formControlName="date2" [showIcon]="true" inputId="icondisplay2"></p-calendar>
+      </div>
+      <div class="checkbox-container">
+        <div class="checkbox-item">
+          <p-checkbox [binary]="true" formControlName="past" inputId="was"></p-checkbox>
+          <label for="was">אימונים שהיו</label>
+        </div>
+
+        <div class="checkbox-item">
+          <p-checkbox [binary]="true" formControlName="future" inputId="future"></p-checkbox>
+          <label for="future">אימונים שיהיו</label>
+        </div>
+      </div>
+    </div>
+
+    <p-accordion>
+      <p-accordionTab *ngFor="let training of displayedcalanderAT" (click)="selectTraining(training.id)">
+        <ng-template pTemplate="header">
+          <div class="accordion-header">
+            <app-training-deatails [training]="training"></app-training-deatails>
+          </div>
+        </ng-template>
+      </p-accordionTab>
+    </p-accordion>
+
+    <div class="pagination-buttons" *ngIf="calanderAT.length > itemsPerPage">
+      <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= calanderAT.length">הבא</button>
+      <button (click)="previousPage()" [disabled]="currentPage === 1">הקודם</button>
+    </div>
+  </div>
+</div>

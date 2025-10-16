@@ -1,0 +1,85 @@
+
+<div class="panel">
+  <div class="header">  
+   <h1>מאמנים <img src="assets/contact-icon.png" alt="Contact Icon" class="contact-icon"></h1>
+
+    <div class="bt">
+    <p-button label="הוספת מאמן" [raised]="true"  (click)="navigateToAddTrainer()" severity="secondary" class="add-trainer-button"> 
+      <span class="add-trainer-icon-wrapper">
+        <img src="assets/plus-icon2.png" alt="Add Trainer Icon" class="add-trainer-icon">
+      </span>
+     </p-button>
+    </div></div>
+ 
+  <div class="body">
+    <div class="search-inputs">
+      <div class="search-wrapper">
+        <input id="searchNameInput" placeholder="חפש לפי שם" type="search" class="form-control" #nameInput (input)="filterBySearch(nameInput.value, emailInput.value)" />
+        <img src="assets/search-icon2.png" alt="Search Icon" class="search-icon">
+      </div>
+      <div class="search-wrapper">
+        <input id="searchEmailInput" placeholder="חפש לפי אימייל" type="search" class="form-control" #emailInput (input)="filterBySearch(nameInput.value, emailInput.value)" />
+        <img src="assets/search-icon2.png" alt="Search Icon" class="search-icon">
+      </div>
+    </div>
+
+
+    
+    <p-accordion>
+      <p-accordionTab *ngFor="let trainer of displayedTrainers" (click)="selectTrainer(trainer.id)">
+        <ng-template pTemplate="header">
+          {{ trainer.firstName }} {{ trainer.lastName }}
+        </ng-template>
+        <!-- <div class="accordion-content"> -->
+          <!-- <p class="m-0"> -->
+            <app-trainer-card *ngIf="selectedTrainerId === trainer.id" [trainerId]="selectedTrainerId"></app-trainer-card> 
+        <!-- </div> -->
+      </p-accordionTab>
+    </p-accordion>
+
+
+    
+    <div class="pagination-buttons" *ngIf="trainers.length > itemsPerPage">
+      <button (click)="previousPage()" 
+              [disabled]="currentPage === 1" 
+              class="pagination-button prev-button">
+        &lt;
+        <span class="tooltip">הקודם</span>
+      </button>
+      
+      <button (click)="nextPage()" 
+              [disabled]="currentPage * itemsPerPage >= trainers.length" 
+              class="pagination-button next-button">
+        &gt;
+        <span class="tooltip">הבא</span>
+      </button>
+    </div>
+  </div>
+  <p-dialog header="הוספת מאמן" [(visible)]="showAddTrainerDialog" (onHide)="closeAddTrainerDialog()">
+    <form [formGroup]="myForm" id="form" (submit)="addTrainer()">
+      <div class="form-group">
+        <label>שם פרטי</label><br>
+        <input pInputText id="firstName" formControlName="firstName" />
+      </div>
+      <div class="form-group">
+        <label>שם משפחה</label><br>
+        <input pInputText id="lastName" formControlName="lastName" />
+      </div>
+      <div class="form-group">
+        <label>טלפון</label><br>
+        <input pInputText id="tel" formControlName="tel" />
+      </div>
+      <div class="form-group">
+        <label>מייל</label><br>
+        <input pInputText id="email" formControlName="email" />
+      </div>
+      <div class="form-group">
+        <label>כתובת</label><br>
+        <input pInputText id="address" formControlName="address" />
+      </div>
+      <div class="form-group">
+        <input type="submit" value="הוספה" [disabled]="!myForm.valid">
+      </div>
+    </form>
+  </p-dialog>
+</div>

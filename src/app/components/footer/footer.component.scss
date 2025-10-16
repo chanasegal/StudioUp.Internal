@@ -1,0 +1,17 @@
+.link-container {
+  display: flex; 
+   align-items: center; 
+  margin-top: 2.2%;
+  justify-content: center;
+  gap: 160px; 
+
+  
+  .link-image {
+    width: 100px; 
+    height: auto; 
+    object-fit: contain;
+  }
+  .lehumit{
+    width: 170px; 
+  }
+}

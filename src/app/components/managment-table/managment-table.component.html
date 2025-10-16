@@ -1,0 +1,387 @@
+<div id="containerman">
+    <div id="k">
+        <h1 dir="ltr">דף ניהול לטבלאות ניהול <img src="assets/contact-icon.png" alt="Contact Icon" class="c-icon" ></h1>
+        <div id="options">
+
+            <p-accordion dir="ltr">
+                <p-accordionTab header="לטבלת סוג מתאמנים" >
+                    <div *ngFor="let c of custType;let i = index" dir="rtl">
+                        <div *ngIf="editItemId !== c.id; else editForm" id="one">
+                            <p style="margin: 5px; font-size: 135%;width: 60%;"><span style="color: #D91C5C;">•</span>
+                                {{c.title}}</p>
+                            <div id="icons">
+                                <i class="pi pi-pen-to-square" (click)="c.id && edit(c.id)"></i>
+                                <i class="pi pi-trash" (click)="c.id && deleteForCustomerType(c.id)"></i>
+                            </div>
+                        </div>
+                        <ng-template #editForm>
+                            <form [formGroup]="myForm" id="two" (submit)="c.id&&saveChanges(c.id)">
+                                <label
+                                    style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;width: 15%;">סוג
+                                    לקוח:</label><br>
+                                <input pInputText id="title" formControlName="title" [ngModel]="c.title" />
+                                <div style="display: flex; flex-direction: column;width: 200px;height:60px;    
+                                    justify-content: space-between;margin-right: 29%;margin-bottom: 1.2%;">
+                                    <input type="submit" value="שמור שינויים">
+                                    <input type="button" value="ביטול" (click)="cancel()">
+                                </div>
+                            </form>
+                        </ng-template>
+                    </div>
+                    <p-button *ngIf="addCType!==true" label="הוספה" id="add-trainer-button" (click)="addCustType()">
+                        <span class="add-trainer-icon-wrapper">
+                            <i class="pi-plus-circle"></i>
+                        </span>
+                    </p-button>
+                    <form *ngIf="addCType===true" [formGroup]="myForm" id="two" (submit)="addCustomerType()" dir="rtl">
+                        <label
+                            style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;">סוג
+                            אימון:
+                        </label><br>
+                        <input pInputText id="title" formControlName="title" [ngModel]="" />
+
+                        <div dir="rtl" style="display: flex; flex-direction: column;width: 200px;height:60px;    
+                              justify-content: space-between;margin-right: 29%;margin-bottom: 1.2%;">
+                            <input type="submit" value="הוספה ">
+                            <input type="button" value="ביטול" (click)="cancel()">
+
+                        </div>
+                    </form>
+                </p-accordionTab>
+                <p-accordionTab header="לטבלת סוג אימונים">
+                    <div *ngFor="let x of trainType;let i = index" dir="rtl">
+                        <div *ngIf="editItemId !== x.id; else editForm" id="one">
+                            <div style="display: flex; flex-direction: row; align-items: baseline ;">
+                                <p style="margin: 5px; font-size: 135%;"><span style="color: #D91C5C;">•</span>
+                                    {{x.title}}</p>
+                            </div>
+                            <div id="icons">
+                                <i class="pi pi-pen-to-square" (click)="x.id && edit(x.id)"></i>
+                                <i class="pi pi-trash" (click)="x.id && delForTrainingType(x.id)"></i>
+                            </div>
+                        </div>
+                        <ng-template #editForm>
+                            <form [formGroup]="myForm" id="two" (submit)="x.id&&saveChangesForTrainingType(x.id)">
+                                <label
+                                    style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;">סוג
+                                    אימון:</label><br>
+                                <input pInputText id="title" formControlName="title2" [ngModel]="x.title" />
+                                <div style="display: flex; flex-direction: column;width: 200px;height:60px;    
+                                    justify-content: space-between;margin-right: 29%;margin-bottom: 1.2%;">
+                                    <input type="submit" value="שמור שינויים">
+                                    <input type="button" value="ביטול" placeholder="&#xf00d;" (click)="cancel()">
+                                </div>
+                            </form>
+                        </ng-template>
+                    </div>
+                    <p-button dir="rtl" *ngIf="addTr!==true" label="הוספה" id="add-trainer-button" (click)="addTR()">
+                    </p-button>
+                    <form *ngIf="addTr===true" [formGroup]="myForm" id="two" (submit)="addTrainType()" dir="rtl">
+                        <label
+                            style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;">סוג
+                            אימון:
+                        </label><br>
+                        <input pInputText id="title" formControlName="title" [ngModel]="" />
+
+                        <div style="display: flex; flex-direction: column;width: 200px;height:60px;    
+                                  justify-content: space-between;margin-right: 29%;margin-bottom: 1.2%;">
+                            <input type="submit" value="הוסף ">
+                            <input type="button" value="ביטול" (click)="cancel()">
+                        </div>
+                    </form>
+                </p-accordionTab>
+                <p-accordionTab header="לטבלת אפשרויות תשלום">
+                    <div *ngFor="let x of paymOptions;let i = index" dir="rtl">
+                        <div *ngIf="editItemId !== x.id; else editForm" id="one">
+                            <p style="margin: 5px; font-size: 135%;margin-top: 15px;"><span
+                                    style="color: #D91C5C;">•</span> {{x.title}}</p>
+                            <div id="icons">
+                                <i class="pi pi-pen-to-square" (click)="x.id && edit(x.id)"></i>
+                                <i class="pi pi-trash" (click)="x.id && delForPaymentOptions(x.id)"></i>
+                            </div>
+                        </div>
+                        <ng-template #editForm>
+                            <form [formGroup]="myForm" id="two" (submit)="x.id&&saveChangesForPayment(x.id)">
+                                <label
+                                    style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;">סוג
+                                    תשלום:
+                                </label><br>
+                                <input pInputText id="title" formControlName="title3" [ngModel]="x.title" />
+                                <div style="display: flex; flex-direction: column;width: 200px;height:60px;    
+                                    justify-content: space-between;margin-right: 29%;margin-bottom: 1.2%;">
+                                    <input type="submit" value="שמור שינויים">
+                                    <input type="button" value="ביטול" (click)="cancel()">
+                                </div>
+                            </form>
+                        </ng-template>
+                    </div>
+                    <p-button id="but" *ngIf="addPo!==true" label="הוספה" id="add-trainer-button" (click)="addPO()">
+                        <span class="add-trainer-icon-wrapper">
+                            <i class="pi-plus-circle"></i>
+                        </span>
+                    </p-button>
+
+                    <form *ngIf="addPo===true" [formGroup]="myForm" id="two" (submit)="addPayOP()" dir="rtl">
+                        <label
+                            style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;">סוג
+                            תשלום:
+                        </label><br>
+                        <input pInputText id="title" formControlName="title" />
+                        <div style="display: flex; flex-direction: column;width: 200px;height:60px;    
+                                justify-content: space-between;margin-right:29%;
+                                margin-bottom: 1.2%;">
+                            <input type="submit" value="הוסף ">
+                            <input type="button" value="ביטול" (click)="cancel()">
+
+                        </div>
+                    </form>
+                </p-accordionTab>
+                <p-accordionTab header="לטבלת אימונים למתאמן">
+                    <div *ngFor="let x of trainingCustomerTypes;let i = index">
+                        <div *ngIf="editItemId !== x.id; else editForm" id="one" dir="rtl">
+                            <div style="display: flex;flex-direction: column;width: 60%;margin-right: 3%;">
+                                <div style="display: flex; flex-direction: row; align-items: baseline ;">
+                                    <p class="line"> סוג האימון:</p>
+                                    <div *ngFor="let allpaymentOptions of trainType">
+                                        <span style="font-size: 130%;margin-right: 2%;"
+                                            *ngIf="allpaymentOptions.id==x.trainingTypeID">{{allpaymentOptions.title}}</span>
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: row; align-items: baseline ;">
+                                    <p class="line">סוג מתאמנת:</p>
+                                    <div *ngFor="let allpaymentOptions of custType">
+                                        <span style="font-size: 130%;margin-right: 2%;width: 100%;display: block;"
+                                            *ngIf="allpaymentOptions.id==x.customerTypeID">{{allpaymentOptions.title}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="icons">
+                                <i class="pi pi-pen-to-square" (click)="x.id && edit(x.id)"></i>
+                                <i class="pi pi-trash" (click)="x.id && delForTCT(x.id)"></i>
+                            </div>
+                        </div>
+                        <ng-template #editForm>
+                            <form [formGroup]="myForm" id="two" (submit)="x.id&&saveChangesForTCT(x.id)" dir="rtl">
+                                <div id="pl" style="display: flex;flex-direction: column;">
+                                   
+                                    <div style="display: flex;flex-direction: row;">
+                                        <div
+                                            style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;width: 60%;">
+                                            סוג אימון:
+                                        </div>
+
+                                        <select id="mySelect" pInputText formControlName="trainingTypeID">
+                                            <option *ngFor="let paymentOptions of trainType" [value]="paymentOptions.id"
+                                                style="background-color:#D91C5C;font-weight: bold;color: #fff;">
+                                                {{paymentOptions.title}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex;flex-direction: row;">
+                                        <div
+                                            style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;width: 60%;">
+                                            סוג מתאמן:
+                                        </div>
+
+                                        <select id="mySelect" pInputText formControlName="customerTypeID">
+                                            <option *ngFor="let paymentOptions of custType" [value]="paymentOptions.id"
+                                                style="background-color:#D91C5C;font-weight: bold;color: #fff;">
+                                                {{paymentOptions.title}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div
+                                    style="display: flex; flex-direction: column;width: 200px;height:60px;    
+                                    justify-content: space-between;margin-right: 29%;margin-bottom: 1.2%;margin-top: 5%;">
+                                    <input type="submit" value="שמור שינויים">
+                                    <input type="button" value="ביטול" (click)="cancel()">
+                                </div>
+                            </form>
+                        </ng-template>
+                    </div>
+                    <p-button *ngIf="addTC!==true" label="הוספה" id="add-trainer-button" (click)="addTc()" dir="rtl">
+                        <span class="add-trainer-icon-wrapper">
+                            <i class="pi-plus-circle"></i>
+                        </span>
+                    </p-button>
+                    <form *ngIf="addTC===true" [formGroup]="myForm" id="two" (submit)="addTrCustType()" dir="rtl">
+                        <div style="display: flex;flex-direction: column;">
+
+                            <!-- <div style="display: flex;flex-direction: row;">
+                                <label
+                                    style="color: #D91C5C;font-size:140% ;margin-left:1.5%; height: fit-content;margin-right: 1.5%;width: 50%;border-bottom: #D91C5C 2px solid;;">
+                                    סוג אימון:
+                                </label>
+                                <select id="mySelect" pInputText formControlName="trainingTypeID">
+                                    <option *ngFor="let paymentOptions of trainType" 
+                                        style="background-color:#D91C5C;font-weight: bold;color: #fff;">
+                                        {{paymentOptions.title}}
+                                    </option>
+                                </select>
+                            </div> -->
+                            <!-- <div style="display: flex;flex-direction: row;">
+                                <label
+                                    style="color: #D91C5C;font-size:140% ;margin-left:1.5%; height: fit-content;margin-right: 1.5%;width: 50%;border-bottom: #D91C5C 2px solid;">
+                                    סוג מתאמן:
+                                </label>
+
+                                <select id="mySelect" pInputText formControlName="customerTypeID">
+                                    <option *ngFor="let paymentOptions of custType" 
+                                        style="background-color:#D91C5C;font-weight: bold;color: #fff;">
+                                        {{paymentOptions.title}}
+                                    </option>
+                                </select>
+                            </div> -->
+                            <div style="display: flex;flex-direction: row;">
+                                <div
+                                    style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;width: 60%;">
+                                    סוג אימון:
+                                </div>
+
+                                <select id="mySelect" pInputText formControlName="trainingTypeID">
+                                    <option *ngFor="let paymentOptions of trainType" [value]="paymentOptions.id"
+                                        style="background-color:#D91C5C;font-weight: bold;color: #fff;">
+                                        {{paymentOptions.title}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div style="display: flex;flex-direction: row;">
+                                <div
+                                    style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;width: 60%;">
+                                    סוג מתאמן:
+                                </div>
+
+                                <select id="mySelect" pInputText formControlName="customerTypeID">
+                                    <option *ngFor="let paymentOptions of custType" [value]="paymentOptions.id"
+                                        style="background-color:#D91C5C;font-weight: bold;color: #fff;">
+                                        {{paymentOptions.title}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column;width: 200px;height:60px;    
+                          justify-content: space-between;margin-right:29%;margin-bottom: 1.2%;margin-top: 5%;">
+                            <input type="submit" value="הוסף ">
+                            <input type="button" value="ביטול" (click)="cancel()">
+                        </div>
+                    </form>
+                </p-accordionTab>
+                <p-accordionTab header="לטבלת לינקים לעמ' הבית ">
+
+                    <div *ngFor="let x of internalHomeLinks;let i = index" dir="rtl">
+                        <div *ngIf="editItemId !== x.id; else editForm" id="one">
+                            <div id="links">
+                                <div id="link"> <label
+                                        style="color: #D91C5C;font-size: 150%;border-bottom: #D91C5C solid 1px;">שם
+                                        לינק:</label>
+                                    <p style="margin: 5px; font-size: 135%;"> {{x?.title}}</p>
+                                </div>
+                                <div id="link"> <label
+                                        style="color: #D91C5C;font-size: 150%;border-bottom: #D91C5C solid 1px;">לינק:</label>
+                                    <p style="margin: 5px; font-size: 135%;"> {{x?.link}}</p>
+                                </div>
+                                <div id="link"> <label
+                                        style="color: #D91C5C;font-size: 150%;border-bottom: #D91C5C solid 1px;">חיצוני?</label>
+                                    <p style="margin:5px; font-size:135% ;">{{x?.isExternal?'&#10003;':'&#10007;'}}</p>
+                                </div>
+                            </div>
+                            <div id="icons">
+                                <i class="pi pi-pen-to-square" (click)="x.id && edit(x.id)"></i>
+                                <i class="pi pi-trash" (click)="x.id && delForInternalHomeLinks(x.id)"></i>
+                            </div>
+                        </div>
+                        <ng-template #editForm>
+                            <form [formGroup]="myForm" id="two" (submit)="x.id&&saveChangesForHomeInternalLinks(x.id)">
+                                <div style="display: flex;flex-direction: column;">
+                                    <div style="display: flex;flex-direction: row;">
+                                        <div
+                                            style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;width: 30%;">
+                                            שם
+                                            לינק
+                                        </div>
+                                        <input pInputText id="title" formControlName="title4" style="width: 40%"
+                                            [ngModel]="x.title" />
+                                    </div>
+                                    <div style="display: flex;flex-direction: row;">
+                                        <div
+                                            style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;width: 30%;">
+                                            עריכת
+                                            לינק
+                                        </div>
+                                        <input pInputText id="title" formControlName="link" style="width: 40%"
+                                            [ngModel]="x.link" />
+                                    </div>
+                                    <div style="display: flex;flex-direction: row;">
+                                        <div
+                                            style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;width: 30%;">
+                                            חיצוני?
+                                        </div>
+                                        <select dir="rtl" id="active" name="active" formControlName="isExternal"
+                                            [ngModel]="x.isExternal" class="custom-select"
+                                            style="font-size:25px;height: 25px;">
+                                            <option [ngValue]="true" style="color:rgb(65, 243, 65);font-size: 25px;">
+                                                &#10003;</option>
+                                            <option [ngValue]="false" style="color: red;font-size: 25px;">&#10007;
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div
+                                    style="display: flex; flex-direction: column;width: 200px;height:60px;    
+                                    justify-content: space-between;margin-right: 9%;margin-bottom: 1.2%;margin-top: 5%;">
+                                    <input type="submit" value="שמור שינויים" style="width: 100%;margin-right: -8%;">
+                                    <input type="button" value="ביטול" (click)="cancel()"
+                                        style="width: 100%;margin-right: -8%;">
+                                </div>
+                            </form>
+                        </ng-template>
+                    </div>
+                    <p-button *ngIf="addPo!==true" label="הוספה" id="add-trainer-button" (click)="addPO()">
+                        <span class="add-trainer-icon-wrapper">
+                            <i class="pi-plus-circle"></i>
+                        </span>
+                    </p-button>
+
+                    <form *ngIf="addPo===true" [formGroup]="myForm" id="two" (submit)="addInternalHomeLink()" dir="rtl">
+                        <div style="display: flex;flex-direction: column;">
+                            <div style="display: flex;flex-direction: row;">
+                                <div
+                                    style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;width: 30%;">
+                                    שם
+                                    לינק
+                                </div>
+                                <input pInputText id="title" formControlName="title" style="width: 40%" />
+                            </div>
+                            <div style="display: flex;flex-direction: row;">
+                                <div
+                                    style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;width: 30%;">
+                                    עריכת
+                                    לינק
+                                </div>
+                                <input pInputText formControlName="link"
+                                    style="width: 40%;margin-bottom: 2%;color: black;background-color: #fff;" />
+                            </div>
+                            <div style="display: flex;flex-direction: row;">
+                                <div
+                                    style="color: #D91C5C;font-size:140% ;margin-left:1.5%; border-bottom: #D91C5C 2px solid;height: fit-content;margin-right: 1.5%;width: 30%;">
+                                    לינק
+                                    חיצוני?
+                                </div>
+                                <select dir="rtl" id="active" name="active" formControlName="isExternal"
+                                    class="custom-select" style="font-size:25px;height: 25px;">
+                                    <option [ngValue]="true" style="color:rgb(65, 243, 65);font-size: 25px;">
+                                        &#10003;</option>
+                                    <option [ngValue]="false" style="color: red;font-size: 25px;">&#10007;</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column;width: 200px;height:60px;    
+                                justify-content: space-between;margin-right: 19%;margin-bottom: 1.2%;margin-top: 4%">
+                            <input type="submit" value="הוסף">
+                            <input type="button" value="ביטול" (click)="cancel()">
+                        </div>
+                    </form>
+                </p-accordionTab>
+            </p-accordion>

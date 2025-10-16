@@ -1,0 +1,34 @@
+<div *ngIf="actionType=='add' || actionType=='update'">
+    <div>
+        <form [formGroup]="subscriptionForm" (ngSubmit)="saveDetails()">
+            <div class="container my-custom-class">
+                <p-dialog header="הוספת מנוי" [modal]="true" [(visible)]="visible" [style]="{ width: '40%', minWidth: '40%', height:'auto' }"><br/>
+                    <div class="form-group">
+                        <label for="title" class="label">סוג מנוי</label>
+                        <input pInputText type="text" name="title" formControlName="title" class="input common-input" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label for="numberOfTrainingPerWeek" class="label">מס' אימונים בשבוע</label>
+                        <p-inputNumber name="numberOfTrainingPerWeek" formControlName="numberOfTrainingPerWeek" class="input common-input" autocomplete="off"></p-inputNumber>
+                    </div>
+                    <div class="form-group">
+                        <label for="totalTraining" class="label">מס' אימונים כולל</label>
+                        <p-inputNumber name="totalTraining" formControlName="totalTraining" class="input common-input" autocomplete="off"></p-inputNumber>
+                    </div>
+                    <div class="form-group">
+                        <label for="priceForTraining" class="label">עלות לאימון</label>
+                        <p-inputNumber name="priceForTraining" formControlName="priceForTraining" class="input common-input" autocomplete="off"></p-inputNumber>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="label">תיאור</label>
+                        <input pInputText type="text" name="description" formControlName="description" class="input common-input" autocomplete="off" />
+                    </div>
+                       <div class="options-buttons">
+                        <p-button label="שמירה" type="Submit" class="btn-save" (onClick)="visible = false" [disabled]="subscriptionForm.invalid" />
+                        <p-button label="ביטול" (onClick)="cancleAction()" (onClick)="visible = false" />
+                    </div>
+                </p-dialog>
+            </div>
+        </form>
+    </div>
+</div>

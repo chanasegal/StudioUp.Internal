@@ -1,0 +1,187 @@
+@import "primeicons/primeicons.css";
+.panel {
+  display: flex;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 2px solid #ffcc0f;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+div{
+  margin: 2%;
+}
+::ng-deep .p-calendar .p-inputtext {
+  border-color: #D91C5C !important;
+  border-radius: 8px !important;
+}
+.custom-calendar-container {
+  border:none;
+}
+
+//אייקון לוח שנה שלא רואים
+::ng-deep .p-calendar .p-datepicker-trigger {
+  position: absolute;
+  // right: 5px;
+  // top: 50%;
+  // transform: translateY(-50%);
+  pointer-events: none;
+  background-color: transparent !important;
+  color: transparent !important;
+  border: none !important;
+}
+::ng-deep .p-calendar .p-datepicker-trigger .pi {
+  color: #D91C5C !important;
+}
+// ::ng-deep .p-datepicker-prev:before {
+//   content: 'prev';
+// }
+// ::ng-deep .p-datepicker-next:before {
+//   content: 'next';
+// }
+.controls-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.checkbox-item {
+  display: flex;
+  align-items: center;
+}
+.checkbox-item label {
+  margin: 0;
+  padding: 0 8px;
+}
+// @media (max-width: 768px) {
+//   .row {
+//       flex-direction: column;
+//   }
+//   .training-detail {
+//       width: 100%;
+//   }
+// }
+//  custom-calendar-container
+.isWeekend{
+  display: flex;
+ flex-direction: column;
+ width: max-content;
+}
+.submitBtn{
+  display: flex;
+  align-items: center;
+}
+.divOptions{
+  display: flex;
+  justify-content: space-around;
+}
+.custom-calendar-container {
+  position: relative;
+}
+//אייקון בתוך האינפוט של הלוח שנה
+.custom-calendar-icon {
+  position: absolute;
+  right: 10px; /* מציב את האייקון בצד ימין בתוך ה-Input */
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* האייקון לא יפריע למשתמש ללחוץ על ה-Input */
+  color: #D91C5C;
+  font-size: 1.5em;
+}
+p{ 
+   color: #D91C5C;
+}
+::ng-deep .justify-content-center{
+  background-color: #7c7c70 !important;
+
+}
+::ng-deep .p-selectbutton{
+  // background-color: #7c7c70;
+
+}
+::ng-deep .p-calendar .p-datepicker .p-datepicker-next,
+::ng-deep .p-calendar .p-datepicker .p-datepicker-prev {
+    background-color: transparent !important;
+    // border-radius: 6px;
+    color: initial;
+    // border: none;
+    // box-shadow: none;
+}
+::ng-deep .p-selectbutton .p-button {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; /* מסגרת בולטת */
+  border: none !important;
+  background-color: #7c7c70 !important;
+
+}
+button{
+  background-color: #7c7c70;
+
+}
+
+// p-selectbutton p-buttonset p-component
+::ng-deep .p-selectbutton {
+
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .panel {
+    flex-direction: column; /* פריסה לאורך למסכים קטנים */
+    align-items: center; /* יישור התוכן במרכז */
+  }
+
+  .custom-calendar-container {
+    width: 100%; /* מלא רוחב המסך */
+  }
+
+  .custom-calendar-icon {
+    right: 5px; /* התאמת מיקום האייקון */
+  }
+
+  // p-calendar {
+  //   [numberOfMonths] { /* התאם את מספר החודשים בתצוגה לפי רוחב המסך */
+  //     @media (max-width: 768px) {
+  //     }
+  //   }
+  // }
+}
+
+@media (min-width: 769px) {
+  .panel {
+    max-width: 800px; /* גודל מקסימלי למסכים גדולים */
+  }
+}
+
+
+//שומר שהתאריך לא יעלה על האייקון
+::ng-deep .p-calendar .p-inputtext {
+  // border-color: #D91C5C !important;
+  padding-left: 10px;
+  direction: ltr;
+  border-radius: 8px !important;
+  height: auto;
+  width: fit-content;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-right: 40px; /* מרחב נוסף בתוך ה-Input כדי שיהיה מקום לאייקון */
+}
+
+// //אייקון של הלוח שנה
+// ::ng-deep .p-calendar .p-datepicker-trigger {
+//   position: absolute;
+//   right: 5px;
+//   top: 50%;
+//   transform: translateY(-50%);
+//   pointer-events: none;
+//   background-color: transparent !important;
+//   // color: #D91C5C !important;
+//   border: none !important;
+// }

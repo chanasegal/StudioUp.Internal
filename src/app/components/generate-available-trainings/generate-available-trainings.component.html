@@ -1,0 +1,64 @@
+<!-- {{isCalendarDisabled|json}} -->
+
+<div class="panel">
+    <div>
+        <div class="card flex justify-content-center custom-calendar-container">
+          <!-- Calendar input -->
+          <p-calendar
+          [(ngModel)]="rangeDates"
+          selectionMode="range"
+          [readonlyInput]="true"
+          [showIcon]="false"
+          [numberOfMonths]="numberOfMonths"
+          [showButtonBar]="true"
+          [inline]="isCalendarInline"
+          [monthNavigator]="true" 
+          [yearNavigator]="true" 
+          [yearRange]="'2000:2030'"
+          [showOnFocus]="true"
+          [maxDateCount]="30"
+          [minDate]="today"
+          [disabled]=isCalendarDisabled
+          (onClick)="toggleCalendar()"
+          (onBlur)="closeCalendarOnBlur($event);onWeekendToggle()"
+          (onSelect)="onDateSelect($event)">
+        </p-calendar>
+          <!-- Custom calendar icon inside the input -->
+          <i class="pi pi-calendar custom-calendar-icon" (click)="toggleCalendar()"></i>
+          <!-- Toast notification -->
+          <p-toast></p-toast>
+         </div>
+        </div>
+     
+         <div>
+        <div class="isWeekend">
+          <p >הגדרת השיעורים עד סופ"ש</p>
+    
+          <div class="divOptions">
+          <div class="card flex justify-content-center">
+            <p-selectButton 
+                [options]="stateOptions" 
+                [(ngModel)]="isWeekend" 
+                optionLabel="label" 
+                optionValue="value" 
+               severity="secondary"
+               (ngModelChange)="onWeekendToggle()"
+              />
+          </div>
+    <!-- {{isWeekend|json}} -->
+  
+      </div>
+    
+      </div>
+        </div>
+        <div class="submitBtn" >
+
+          <p-button label="הוספת אימונים" [raised]="true"  severity="secondary"
+          (click)="submitForGenerateAvailableTraining()"></p-button>
+        </div>
+    </div>
+    
+    <!-- {{rangeDates | json}} -->
+    <!-- {{rangeDates&&rangeDates.length | json}} -->
+    <!-- tmp -->
+  <!-- {{tmp}} -->

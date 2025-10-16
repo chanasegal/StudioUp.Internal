@@ -1,0 +1,31 @@
+
+
+<div class="training-details-wrapper">
+  <div class="training-details-container">
+    <div class="training-header">
+      <span class="training-title">{{ training.trainingTypeName }}</span>
+      <hr class="header-divider">
+    </div>
+    <div class="training-details">
+      <div class="detail-item">
+        <i class="icon calendar-icon"></i>
+        <span>{{ training.date | date: 'dd.MM.yy' }} ({{ training.dayOfWeek | dayOfWeek }})</span>
+      </div>
+      <div class="detail-item">
+        <i class="icon time-icon"></i>
+        <span>{{calculateEndTime(training.time)}} - {{ training.time  }}</span>
+        <div class="vertical-divider"></div>
+      </div>
+      <div class="detail-item">
+        <i class="icon trainer-icon"></i>
+        <span>{{ training.trainerName }}</span>
+        <div class="vertical-divider"></div>
+      </div>
+      <div class="detail-item participants-cell">
+        <i class="icon participants-icon"></i>
+        <span>{{ training.participantsCount }}</span>
+        <div class="vertical-divider"></div>
+      </div>
+    </div>
+  </div>
+</div>
